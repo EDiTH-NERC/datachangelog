@@ -4,12 +4,12 @@
 \name{datachangelog-package}
 \alias{datachangelog}
 \alias{datachangelog-package}
-\title{datachangelog: What the Package Does (One Line, Title Case)}
+\title{datachangelog: Evaluate and Log Changes in Data Records}
 \description{
-What the package does (one paragraph).
+Provides functionality for evaluating and logging changes in data records between datasets. The aim of this package is to provide a lightweight and convenient option for sharing changes in data records (e.g. due to data cleaning efforts).
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com}
+\strong{Maintainer}: Lewis A. Jones \email{LewisA.Jones@outlook.com} (\href{https://orcid.org/0000-0003-3902-8986}{ORCID})
 
 }
 \keyword{internal}

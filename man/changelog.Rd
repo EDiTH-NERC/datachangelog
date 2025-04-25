@@ -9,8 +9,9 @@ changelog(
   y,
   by = "column",
   report = FALSE,
+  file = "CHANGELOG.md",
   author = NULL,
-  date = Sys.Date(),
+  date = NULL,
   ver = NULL
 )
 }
@@ -24,9 +25,11 @@ changelog(
 \item{by}{\code{character}. How should \code{x} and \code{y} be compared?
 Options include by "column" (the default) or "row".}
 
-\item{report}{\code{logical}. If \code{TRUE}, a markdown report
-("CHANGELOG.md") will be generated in the current working directory
-(default: \code{FALSE}).}
+\item{report}{\code{logical}. If \code{TRUE}, a verbose report will be
+written to \code{file}.}
+
+\item{file}{\code{character}. Path, name, and extension of the file to be
+saved. Defaults to current working directory and "CHANGELOG.md".}
 
 \item{author}{\code{character}. The author of to report in the changelog
 report, if requested.}
@@ -34,13 +37,13 @@ report, if requested.}
 \item{date}{\code{character}. The data to report in the changelog report,
 if requested. By default, the current date is used.}
 
-\item{version}{\code{character}. The version number to report in the
+\item{ver}{\code{character}. The version number to report in the
 changelog report, if requested.}
 }
 \value{
 A \code{data.frame} containing data record comparison results. Only
 changes are reported. If \code{report} is \code{TRUE}, a changelog report
-("CHANGELOG.md") will also be generated in the current working directory.
+will also be saved to \code{file}.
 }
 \description{
 A function to evaluate and log changes in data records between two
