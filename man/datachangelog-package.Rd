@@ -8,6 +8,13 @@
 \description{
 Provides functionality for evaluating and logging changes in data records between datasets. The aim of this package is to provide a lightweight and convenient option for sharing changes in data records (e.g. due to data cleaning efforts).
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://edith-nerc.github.io/datachangelog/}
+}
+
+}
 \author{
 \strong{Maintainer}: Lewis A. Jones \email{LewisA.Jones@outlook.com} (\href{https://orcid.org/0000-0003-3902-8986}{ORCID})
 
