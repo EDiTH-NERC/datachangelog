@@ -4,7 +4,7 @@ generate_report <- function(x, xy_cols = NULL, yx_cols = NULL,
                             file = NULL, metadata) {
 
   # Title
-  changelog <- c("# Changelog  \n\n")
+  changelog <- c("# Changelog \n\n")
 
   # Extract metadata
   if (!is.null(metadata)) {
@@ -55,7 +55,6 @@ generate_report <- function(x, xy_cols = NULL, yx_cols = NULL,
 
   # Compile content
   content <- paste0(changelog, metadata,
-                    " \n\n",
                     xy_cols, yx_cols, xy_ids, yx_ids,
                     content)
   writeLines(content, file)

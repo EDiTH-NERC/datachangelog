@@ -28,6 +28,7 @@ test_that("changelog works", {
   expect_warning(evaluate(x = x, y = y, by = "car", report = TRUE))
   x <- y[2:nrow(y), 2:ncol(y),]
   expect_warning(evaluate(x = x, y = y, by = "car", report = TRUE))
+  unlink("CHANGELOG.md")
 
   x <- mtcars
   x$car <- row.names(x)

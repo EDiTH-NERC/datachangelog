@@ -8,3 +8,4 @@ TODO.md
 ^pkgdown$
 ^\.github$
 ^codecov\.yml$
+^LICENSE\.md$

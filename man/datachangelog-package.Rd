@@ -11,9 +11,9 @@ Provides functionality for evaluating and logging changes in data records betwee
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://edith-nerc.github.io/datachangelog/}
-  \item \url{https://github.com/EDiTH-NERC/datachangelog}
-  \item Report bugs at \url{https://github.com/EDiTH-NERC/datachangelog/issues}
+  \item \url{https://ancientoceans.org/datachangelog/}
+  \item \url{https://github.com/ancientoceanslab/datachangelog}
+  \item Report bugs at \url{https://github.com/ancientoceanslab/datachangelog/issues}
 }
 
 }

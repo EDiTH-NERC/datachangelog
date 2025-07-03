@@ -129,14 +129,14 @@ evaluate <- function(x, y, by,
   # Evaluate changes
   changes <- lapply(ref, function(j) {
     all_match <- FALSE
-    state <- x[j, ] != y[j, ]
+    state <- x[which(x[, by] == j), ] != y[which(y[, by] == j), ]
     # Get names/indices
     column <- colnames(x)[state]
     row <- j
     if (length(column) == 0) all_match <- TRUE
     # Select original/replacement values
-    original <- x[j, ][state]
-    replacement <- y[j, ][state]
+    original <- x[which(x[, by] == j), ][state]
+    replacement <- y[which(y[, by] == j), ][state]
     # Create dataframe
     if (all_match) {
       data.frame()
@@ -148,6 +148,8 @@ evaluate <- function(x, y, by,
   x <- do.call(rbind, changes)
   # Warn
   if (nrow(x) != 0) {
+    # Set colname as `by`
+    colnames(x)[1] <- by
     warning("Record values have changed between `x` and `y`.")
   }
   # Create a report of changes ----

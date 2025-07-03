@@ -1,6 +1,6 @@
 Package: datachangelog
 Title: Evaluate and Log Changes in Data Records
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person(given = "Lewis A.", family = "Jones", email = "LewisA.Jones@outlook.com",
       role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3902-8986"))
@@ -8,7 +8,7 @@ Description: Provides functionality for evaluating and logging changes in data
   records between datasets. The aim of this package is to provide a lightweight
   and convenient option for sharing changes in data records (e.g. due to data
   cleaning efforts).
-License: GPL (>= 3)
+License: CC BY 4.0
 Language: en-GB
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -18,5 +18,5 @@ Depends:
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://edith-nerc.github.io/datachangelog/, https://github.com/EDiTH-NERC/datachangelog
-BugReports: https://github.com/EDiTH-NERC/datachangelog/issues
+URL: https://ancientoceans.org/datachangelog/, https://github.com/ancientoceanslab/datachangelog
+BugReports: https://github.com/ancientoceanslab/datachangelog/issues

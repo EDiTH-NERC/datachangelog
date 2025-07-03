@@ -1,4 +1,5 @@
-url: https://edith-nerc.github.io/datachangelog/
+url: https://ancientoceans.org/datachangelog
 template:
   bootstrap: 5
+  bootswatch: flatly
 
