@@ -1,3 +1,7 @@
 url: https://ancientoceans.org/datachangelog
 template:
   bootstrap: 5
+  bootswatch: flatly
+  bslib:
+    navbar-padding-y: 8px
+
