@@ -18,11 +18,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="index.html">datachangelog</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/EDiTH-NERC/datachangelog/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ancientoceanslab/datachangelog/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -51,23 +51,130 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The development version of <code>datachangelog</code> can be installed via GitHub using:</p>
+<p>The goal of <code>datachangelog</code> is to facilitate easy comparison between two datasets, evaluate whether any changes in data records or fields has taken place, and generate a data changelog.</p>
+<div class="section level2">
+<h2 id="developer">Developer<a class="anchor" aria-label="anchor" href="#developer"></a>
+</h2>
+<ul>
+<li>
+<a href="mailto:Lewis.Jones@ucl.ac.uk">Lewis A. Jones</a>, University College London</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>The stable version of <code>datachangelog</code> can be installed from CRAN using:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"datachangelog"</span><span class="op">)</span></span></code></pre></div>
+<p>The development version of <code>datachangelog</code> can be installed via GitHub using:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"EDiTH-NERC/datachangelog"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"ancientoceanslab/datachangelog"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example-usage">Example usage<a class="anchor" aria-label="anchor" href="#example-usage"></a>
+</h2>
+<p>A minimal example evaluating two datasets and generating a changelog report:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load packages</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ancientoceans.org/datachangelog/">datachangelog</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create original dataset</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span>
+<span><span class="va">x</span><span class="op">$</span><span class="va">car</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Imitate changes in replacement dataset</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span></span>
+<span><span class="co"># Drop some fields (columns)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span>, <span class="fl">4</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># Drop some records (rows)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, <span class="fl">4</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># Change some record values</span></span>
+<span><span class="va">y</span><span class="op">$</span><span class="va">qsec</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">$</span><span class="va">qsec</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span> <span class="op">*</span> <span class="fl">2</span></span>
+<span><span class="co"># Evaluate changes</span></span>
+<span><span class="fu"><a href="reference/evaluate.html">evaluate</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, by <span class="op">=</span> <span class="st">"car"</span>, report <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>         metadata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Title <span class="op">=</span> <span class="st">"A really cool dataset"</span>,</span>
+<span>                         Author <span class="op">=</span> <span class="st">"Bob"</span>, </span>
+<span>                         Date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                         Version <span class="op">=</span> <span class="st">"0.0.1"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Console output</p>
+<pre><code>Comparing common records between `x` and `y`.
+Comparing common fields between `x` and `y`.
+         car column original replacement
+1   Merc 280   qsec     18.3        36.6
+2  Merc 280C   qsec     18.9        37.8
+3 Merc 450SE   qsec     17.4        34.8
+4 Merc 450SL   qsec     17.6        35.2
+Warning messages:
+1: In evaluate(x = x, y = y, by = "car", report = TRUE, metadata = list(Title = "A really cool dataset",  :
+  Records present in `x` but not `y`: Mazda RX4, Mazda RX4 Wag, Datsun 710, Hornet 4 Drive, Hornet Sportabout
+2: In evaluate(x = x, y = y, by = "car", report = TRUE, metadata = list(Title = "A really cool dataset",  :
+  Fields present in `x` but not `y`: mpg, cyl, disp, hp, drat, wt
+3: In evaluate(x = x, y = y, by = "car", report = TRUE, metadata = list(Title = "A really cool dataset",  :
+  Record values have changed between `x` and `y`.</code></pre>
+<p>Markdown report output</p>
+<pre><code># Changelog
+
+Title: A really cool dataset
+Author: Bob
+Date: 20272
+Version: 0.0.1
+
+## The following fields have been removed:
+
+-  mpg
+-  cyl
+-  disp
+-  hp
+-  drat
+-  wt
+
+## The following records have been removed:
+
+-  Mazda RX4
+-  Mazda RX4 Wag
+-  Datsun 710
+-  Hornet 4 Drive
+-  Hornet Sportabout
+
+## The following record values have been changed:
+
+Merc 280
+
+- qsec: 18.3 -&gt; 36.6
+
+Merc 280C
+
+- qsec: 18.9 -&gt; 37.8
+
+Merc 450SE
+
+- qsec: 17.4 -&gt; 34.8
+
+Merc 450SL
+
+- qsec: 17.6 -&gt; 35.2
+</code></pre>
+</div>
+<div class="section level2">
+<h2 id="funding">Funding<a class="anchor" aria-label="anchor" href="#funding"></a>
+</h2>
+<p>The development of this R package was supported by a NERC Independent Research Fellowship (UKRI185) awarded to Lewis A. Jones.</p>
+</div>
 </div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/EDiTH-NERC/datachangelog/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/EDiTH-NERC/datachangelog/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/ancientoceanslab/datachangelog/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ancientoceanslab/datachangelog/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
 <div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>GPL (&gt;= 3)</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://creativecommons.org/licenses/by/4.0" class="external-link">CC BY 4.0</a></small></li>
 </ul>
 </div>
 
@@ -89,8 +196,11 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://app.codecov.io/gh/EDiTH-NERC/datachangelog" class="external-link"><img src="https://codecov.io/gh/EDiTH-NERC/datachangelog/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/ancientoceanslab/datachangelog/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/ancientoceanslab/datachangelog/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/ancientoceanslab/datachangelog" class="external-link"><img src="https://codecov.io/gh/ancientoceanslab/datachangelog/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://CRAN.R-project.org/package=datachangelog" class="external-link"><img src="https://www.r-pkg.org/badges/version/datachangelog" alt="CRAN status"></a></li>
+<li><a href="https://cran.r-project.org/package=datachangelog" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/datachangelog" alt="CRAN downloads"></a></li>
+<li><a href="https://github.com/AncientOceansLab/datachangelog/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/AncientOceansLab/datachangelog/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 
