@@ -9,5 +9,4 @@
 - Add pkgdown
 - Add github actions
 - Add codecov
-- Add by argument allowing a column input
 

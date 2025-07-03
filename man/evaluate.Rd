@@ -4,68 +4,55 @@
 \alias{evaluate}
 \title{Evaluate and log changes in data records}
 \usage{
-evaluate(
-  x,
-  y,
-  by = "column",
-  id = NULL,
-  report = FALSE,
-  file = "CHANGELOG.md",
-  author = NULL,
-  date = NULL,
-  ver = NULL
-)
+evaluate(x, y, by, report = FALSE, file = "CHANGELOG.md", metadata = NULL)
 }
 \arguments{
-\item{x}{\code{data.frame}. A \code{data.frame} to compare against
-\code{y}. Treated as the original version of the data records.}
+\item{x}{\code{data.frame}. The original dataset to compare against
+\code{y}.}
 
-\item{y}{\code{data.frame}. A \code{data.frame} to compare against
-\code{x}. Treated as the replacement version of the data records.}
+\item{y}{\code{data.frame}. The replacement dataset to compare against
+\code{x}.}
 
-\item{by}{\code{character}. How should \code{x} and \code{y} be compared?
-Options include by "column" (the default), "row", or "id".}
+\item{by}{\code{character}. The name of the column to treat as unique
+record identifiers for comparing \code{x} and \code{y}.}
 
-\item{id}{\code{character}. The name of the column to treat as unique
-identifiers for comparing \code{x} and \code{y}. Only applicable if
-\code{by} is set to "id".}
-
-\item{report}{\code{logical}. If \code{TRUE}, a verbose report will be
-written to \code{file}.}
+\item{report}{\code{logical}. If \code{TRUE}, a report of the evaluation
+of the datasets will be written to \code{file}.}
 
 \item{file}{\code{character}. Path, name, and extension of the file to be
 saved. Defaults to current working directory and "CHANGELOG.md".}
 
-\item{author}{\code{character}. The author of to report in the changelog
-report, if requested.}
-
-\item{date}{\code{character}. The data to report in the changelog report,
-if requested. By default, the current date is used.}
-
-\item{ver}{\code{character}. The version number to report in the
-changelog report, if requested.}
+\item{metadata}{\code{list}. A named list of metadata values to include in
+the header of the changelog report (e.g. author, version), if requested.}
 }
 \value{
-A \code{data.frame} containing data record comparison results. Only
-changes are reported. If \code{report} is \code{TRUE}, a changelog report
-will also be saved to \code{file}.
+A \code{data.frame} containing evaluation results. Only changes in
+data records are reported. If \code{report} is \code{TRUE}, a changelog
+report will also be saved to \code{file}.
 }
 \description{
-A function to evaluate and log changes in data records between two
-\code{data.frame} and optionally create a markdown changelog report.
+A function to evaluate and log changes between two datasets and
+optionally create a markdown changelog report.
 }
 \details{
-This function assumes that input \code{data.frames} maintain the
-same structure and aims to evaluate whether existing record values have
-been changed (e.g. through data cleaning).
+This function evaluates whether records and fields have been added
+or removed from original (\code{x}) and replacement (\code{y}) dataset, as
+well as whether any record values have changed.
 }
 \examples{
-# Dataset
+# Original data
 x <- mtcars
-# Shuffled dataset
-y <- x[sample(nrow(x)), ]
+x$car <- row.names(x)
+# Replacement dataset
+y <- x
+# Change value
+y$disp[10] <- 150
 # Evaluate differences
-evaluate(x = x, y = y)
+evaluate(x = x, y = y, by = "car")
 # Create markdown report
-evaluate(x = x, y = y, report = TRUE, author = "Bob", ver = "0.0.1")
+evaluate(x = x, y = y, by = "car", report = TRUE,
+         metadata = list(title = "A really cool dataset",
+                         author = "Bob",
+                         date = Sys.Date(),
+                         version = 1))
 }
